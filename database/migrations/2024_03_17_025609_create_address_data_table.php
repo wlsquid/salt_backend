@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name')->default('');
             $table->string('contact_phone')->default('');
             $table->string('landlord')->default('');
-            $table->longText('issues')->default('');
+            $table->longText('issues')->nullable();
             $table->string('support_level_explanation')->default('');
             $table->string('interested_in')->default('');
             $table->timestamps();
