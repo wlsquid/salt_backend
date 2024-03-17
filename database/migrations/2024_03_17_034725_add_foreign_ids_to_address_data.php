@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('address_data', function (Blueprint $table) {
-            $table->foreignId('support_level_id')->references('id')->on('support_levels')->after('issues');
+            $table->foreignId('support_level_id')
+            ->after('issues')->nullable()->references('id')
+            ->on('support_levels');
         });
     }
 

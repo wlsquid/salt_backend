@@ -4,3 +4,6 @@
 - fix up validation
 - improve comments for controllers
 - add relationships to models
+- routes
+- make migrations work in reverse (low priority)
+- (HIGH PRIORITY) make it so admin user is created on app setup and only they can register USERS delete the register route to avoid spam

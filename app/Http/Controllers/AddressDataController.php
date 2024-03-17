@@ -18,7 +18,7 @@ class AddressDataController extends Controller
         $i = 0;
         foreach ($fileContents as $line) {
             $data = str_getcsv($line);
-            if ($data[0] != 'address' || $data[1] != 'postcode') {
+            if ($i < 1 && ($data[0] != 'address' || $data[1] != 'postcode')) {
                 return response()->json([
                     'error' => true,
                     'message' => 'Inavlid csv format',
@@ -45,16 +45,16 @@ class AddressDataController extends Controller
         
         $validateAddressData = $request->validate([
             'address' => 'required|string|max:255',
-            'postcode' => 'required|string|max:255',
-            'name' => 'string|max:255',
-            'contact_phone' => 'string|max:255',
-            'landlord' => 'string|max:255',
-            'issues' => 'string',
-            'support_level_explanation' => 'string|max:255',
-            'interested_in' => 'string|max:255',
-            'support_level_id' => 'integer'            
+            'postcode' => 'required|integer',
+            'name' => 'string|max:255|nullable',
+            'contact_phone' => 'string|max:255|nullable',
+            'landlord' => 'string|max:255|nullable',
+            'issues' => 'string|nullable',
+            'support_level_explanation' => 'string|max:255|nullable',
+            'interested_in' => 'string|max:255|nullable',
+            'support_level_id' => 'integer|nullable'            
         ]);
-
+        // TODO handle error if no address data found with id
         $updateData = AddressData::where('id', intval($dataId))->first()->update(
             [
             'address' => $validateAddressData['address'],
@@ -63,7 +63,7 @@ class AddressDataController extends Controller
             'contact_phone' => $validateAddressData['contact_phone'],
             'landlord' => $validateAddressData['landlord'],
             'issues' => $validateAddressData['issues'],
-            'support_level_explanation' => $validateAddressData['issues'],
+            'support_level_explanation' => $validateAddressData['support_level_explanation'],
             'interested_in' => $validateAddressData['interested_in'],
             'support_level_id' => $validateAddressData['support_level_id']
             ]

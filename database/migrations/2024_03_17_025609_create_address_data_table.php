@@ -16,12 +16,12 @@ return new class extends Migration
             $table->foreignId('address_list_id')->references('id')->on('address_lists');
             $table->string('address');
             $table->integer('postcode');
-            $table->string('name')->default('');
-            $table->string('contact_phone')->default('');
-            $table->string('landlord')->default('');
+            $table->string('name')->nullable();
+            $table->string('contact_phone')->nullable();
+            $table->string('landlord')->nullable();
             $table->longText('issues')->nullable();
-            $table->string('support_level_explanation')->default('');
-            $table->string('interested_in')->default('');
+            $table->string('support_level_explanation')->nullable();
+            $table->string('interested_in')->nullable();
             $table->timestamps();
             $table->boolean('archived')->default(false);
         });

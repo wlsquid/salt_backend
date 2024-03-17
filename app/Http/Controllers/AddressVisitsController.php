@@ -45,8 +45,8 @@ class AddressVisitsController extends Controller
         return $visit;
     }
 
-    public function getLatestAddressVisit($vistId) {
-        $visit = AddressVisits::where('id', intval($vistId))->lastest()->get();
+    public function getLatestAddressVisit($dataId) {
+        $visit = AddressVisits::where('address_data_id', intval($dataId))->lastest()->get();
 
         return $visit;
     }

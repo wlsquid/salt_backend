@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressListsController;
 use App\Http\Controllers\AddressDataController;
+use App\Http\Controllers\AddressVisitsController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -59,4 +60,18 @@ Route::group([
       
       Route::post('/update/{dataId}', [AddressDataController::class, 'updateAddressData'])->name('update');
       Route::get('/{listId}', [AddressDataController::class, 'getAddressDataForList'])->name('all');
+});
+
+
+// visit routes
+Route::group([
+    'prefix' => '/visit',
+    'as' => 'visit.',
+    'middleware' => 'auth:sanctum'
+  ], function () {
+      Route::post('/add', [AddressVisitsController::class, 'addAddressVisit'])->name('add');
+      
+      Route::post('/update/{vistId}', [AddressDataController::class, 'editAddressVisit'])->name('update');
+      Route::get('/latest/{dataId}', [AddressDataController::class, 'getLatestAddressVisit'])->name('latestVisit');
+      Route::get('/addressData/{dataId}', [AddressDataController::class, 'getAllAddressVisitForData'])->name('getForVisit');
 });
