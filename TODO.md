@@ -1,0 +1,6 @@
+- address visits
+- auto route
+- images
+- fix up validation
+- improve comments for controllers
+- add relationships to models

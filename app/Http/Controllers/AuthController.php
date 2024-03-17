@@ -21,7 +21,7 @@ class AuthController extends Controller
                 'email' => $validatedData['email'],                     
                 'password' => Hash::make($validatedData['password']),
          ]);
-  
+         
         $token = $user->createToken('auth_token')->plainTextToken;
         
         return response()->json([
@@ -39,7 +39,7 @@ class AuthController extends Controller
                }
         
         $user = User::where('email', $request['email'])->firstOrFail();
-        
+        $delete = $user->tokens()->delete();
         $token = $user->createToken('auth_token')->plainTextToken;
         
         return response()->json([
