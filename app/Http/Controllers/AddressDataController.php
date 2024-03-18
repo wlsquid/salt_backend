@@ -68,8 +68,8 @@ class AddressDataController extends Controller
             'support_level_id' => $validateAddressData['support_level_id']
             ]
         );
-        
-        return $updateData;
+        // There is a cleaner way
+        return AddressData::where('id', intval($dataId))->first();
     }
 
     public function getAddressDataForList($listId) {
@@ -77,7 +77,7 @@ class AddressDataController extends Controller
         $addressLists = AddressData::where([
             ['archived', '=', 0],
             ['address_list_id', '=', $listId]
-        ])->get();
+        ])->with('addressVisits')->get();
 
         return $addressLists;
     }
